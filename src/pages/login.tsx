@@ -4,9 +4,18 @@ import { useEffect, useRef } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
-import { ThemedTitleV2 } from "@refinedev/mui";
+// import { ThemedTitleV2 } from "@refinedev/mui";
+
+import { yariga } from "assets";
+import { logo } from "assets";
 
 import { CredentialResponse } from "../interfaces/google";
+// import CardHeader from '@mui/material/CardHeader'
+// import Avatar from '@mui/material/Avatar'
+// import IconButton from '@mui/material/IconButton'
+// import CardMedia from '@mui/material/CardMedia'
+// import TextField from '@mui/material/TextField'
+
 
 // Todo: Update your Google Client ID here
 const GOOGLE_CLIENT_ID =
@@ -26,7 +35,7 @@ export const Login: React.FC = () => {
       try {
         window.google.accounts.id.initialize({
           ux_mode: "popup",
-          client_id: GOOGLE_CLIENT_ID,
+          client_id: process.env.REACT_APP_GOOGLE_CLIENT_ID,
           callback: async (res: CredentialResponse) => {
             if (res.credential) {
               login(res);
@@ -51,36 +60,63 @@ export const Login: React.FC = () => {
       style={{
         height: "100vh",
         display: "flex",
+        width: "500px",
         justifyContent: "center",
         alignItems: "center",
-      }}
-    >
-      <Box
-        display="flex"
-        gap="36px"
-        justifyContent="center"
-        flexDirection="column"
+      }}>
+      <Container
+        style={{
+          height: "50vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          margin: "auto",
+          border: "2px solid #ffffff",
+          borderRadius: "15px"
+        }}
       >
-        <ThemedTitleV2
-          collapsed={false}
-          wrapperStyles={{
-            fontSize: "22px",
-            justifyContent: "center",
-          }}
-        />
+        <Box
+          display="flex"
+          gap="36px"
+          justifyContent="center"
+          flexDirection="column"
+        > 
+          
+          <Typography variant="h2" color="initial"
+            style={{
+              // fontFamily: "Montserrat",
+              fontWeight: "bold",
+              fontSize: "36px",
+              lineHeight: "44px",
+              color: "#ffffff",
+              textAlign: "center",
+            }}          
+          >
+            I Lazy
+            </Typography>
 
-        <GoogleButton />
 
-        <Typography align="center" color={"text.secondary"} fontSize="12px">
-          Powered by
-          <img
-            style={{ padding: "0 5px" }}
-            alt="Google"
-            src="https://refine.ams3.cdn.digitaloceanspaces.com/superplate-auth-icons%2Fgoogle.svg"
-          />
-          Google
-        </Typography>
-      </Box>
+          {/* <ThemedTitleV2
+            collapsed={false}
+            wrapperStyles={{
+              fontSize: "22px",
+              justifyContent: "center",
+            }}
+          /> */}
+
+          <GoogleButton />
+
+          <Typography align="center" color={"text.secondary"} fontSize="12px">
+            Powered by
+            <img
+              style={{ padding: "0 5px" }}
+              alt="Google"
+              src="https://refine.ams3.cdn.digitaloceanspaces.com/superplate-auth-icons%2Fgoogle.svg"
+            />
+            Google
+          </Typography>
+        </Box>
+      </Container>
     </Container>
   );
 };
